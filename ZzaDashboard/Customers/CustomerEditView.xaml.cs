@@ -43,18 +43,12 @@ namespace ZzaDashboard.Customers
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             _customer = await _repository.GetCustomerAsync(CustomerId);
-            if (_customer == null) return;
-            firstNameTextBox.Text = _customer.FirstName;
-            lastNameTextBox.Text = _customer.LastName;
-            phoneTextBox.Text = _customer.Phone;
+            DataContext = _customer;
         }
 
         private async void OnSave(object sender, RoutedEventArgs e)
         {
-            // TODO: Validate input... call business rules... etc...
-            _customer.FirstName = firstNameTextBox.Text;
-            _customer.LastName = lastNameTextBox.Text;
-            _customer.Phone = phoneTextBox.Text;
+            // TODO: Validate input... call business rules... etc...           
             await _repository.UpdateCustomerAsync(_customer);
         }
     }
