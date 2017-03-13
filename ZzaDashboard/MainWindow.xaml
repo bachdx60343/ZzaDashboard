@@ -4,8 +4,6 @@
         xmlns:Customers="clr-namespace:ZzaDashboard.Customers"
         Title="MainWindow" Height="300" Width="300">
     <Grid>
-        <Customers:CustomerEditView HorizontalAlignment="Left"
-                                    Margin="42,35,0,0"
-                                    VerticalAlignment="Top" />
+        <Customers:CustomerListView/>
     </Grid>
 </Window>

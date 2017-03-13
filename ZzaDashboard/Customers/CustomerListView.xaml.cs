@@ -15,9 +15,12 @@ using System.Windows.Shapes;
 
 namespace ZzaDashboard.Customers
 {
-    public partial class CustomerEditView : UserControl
+    /// <summary>
+    /// Interaction logic for CustomerListView.xaml
+    /// </summary>
+    public partial class CustomerListView : UserControl
     {
-        public CustomerEditView()
+        public CustomerListView()
         {
             InitializeComponent();
         }
