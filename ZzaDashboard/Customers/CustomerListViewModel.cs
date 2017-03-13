@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 using Zza.Data;
 using ZzaDashboard.Services;
 
@@ -15,7 +16,10 @@ namespace ZzaDashboard.Customers
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
 
             Customers = new ObservableCollection<Customer>(_repo.GetCustomersAsync().Result);
+            DeleteCommand = new RelayCommand(OnDelete, CanDelete);
         }
+
+        public RelayCommand DeleteCommand { get; private set; }
 
         public ObservableCollection<Customer> Customers
         {
@@ -27,6 +31,31 @@ namespace ZzaDashboard.Customers
             {
                 _customers = value;
             }
+        }
+
+        private Customer _selectedCustomer;
+
+        public Customer SelectedCustomer
+        {
+            get
+            {
+                return _selectedCustomer;
+            }
+            set
+            {
+                _selectedCustomer = value;
+                DeleteCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private void OnDelete()
+        {
+            Customers.Remove(SelectedCustomer);
+        }
+
+        private bool CanDelete()
+        {
+            return SelectedCustomer != null;
         }
     }
 }
