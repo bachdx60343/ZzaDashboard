@@ -43,6 +43,11 @@
                 Command="{Binding DeleteCommand}"
                 HorizontalAlignment="Left" VerticalAlignment="Top"
                 Width="75" />
+        <Button Content="Change Customer"
+                Command="{Binding OnChangeCustomerCommand}"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Margin="80 0 0 0"
+                Width="100" />
         <DataGrid x:Name="customerDataGrid"
                   AutoGenerateColumns="False"
                   EnableRowVirtualization="True"

@@ -8,7 +8,7 @@ using ZzaDashboard.Services;
 
 namespace ZzaDashboard.Customers
 {
-    public class CustomerListViewModel
+    public class CustomerListViewModel : INotifyPropertyChanged
     {
         private ICustomersRepository _repo = new CustomersRepository();
         private ObservableCollection<Customer> _customers;
@@ -16,6 +16,7 @@ namespace ZzaDashboard.Customers
         public CustomerListViewModel()
         {
             DeleteCommand = new RelayCommand(OnDelete, CanDelete);
+            OnChangeCustomerCommand = new RelayCommand(OnChangeCustomer);
         }
 
         public void LoadCustomers()
@@ -27,6 +28,7 @@ namespace ZzaDashboard.Customers
         }
 
         public RelayCommand DeleteCommand { get; private set; }
+        public RelayCommand OnChangeCustomerCommand { get; private set; }
 
         public ObservableCollection<Customer> Customers
         {
@@ -37,11 +39,10 @@ namespace ZzaDashboard.Customers
             set
             {
                 _customers = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Customers"));
             }
         }
-
         private Customer _selectedCustomer;
-
         public Customer SelectedCustomer
         {
             get
@@ -52,9 +53,9 @@ namespace ZzaDashboard.Customers
             {
                 _selectedCustomer = value;
                 DeleteCommand.RaiseCanExecuteChanged();
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCustomer"));
             }
         }
-
         private void OnDelete()
         {
              Customers.Remove(SelectedCustomer);
@@ -64,5 +65,18 @@ namespace ZzaDashboard.Customers
         {
             return SelectedCustomer != null;
         }
+
+        private void OnChangeCustomer()
+        {
+            SelectedCustomer.FirstName = "Changed in background";
+        }
+
+        private bool CanChange()
+        {
+            return SelectedCustomer != null;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
     }
 }
