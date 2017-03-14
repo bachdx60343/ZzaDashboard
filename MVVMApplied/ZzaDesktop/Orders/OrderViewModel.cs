@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZzaDesktop.Orders
 {
-    class OrderViewModel : BindableBase
+    public class OrderViewModel : BindableBase
     {
     }
 }

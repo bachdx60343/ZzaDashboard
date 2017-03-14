@@ -22,7 +22,6 @@ namespace ZzaDashboard.OrderPrep
     {
         public OrderPrepView()
         {
-            InitializeComponent();
         }
     }
 }

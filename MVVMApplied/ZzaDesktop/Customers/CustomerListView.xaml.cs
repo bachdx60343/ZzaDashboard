@@ -22,7 +22,6 @@ namespace ZzaDashboard.Customers
     {
         public CustomerListView()
         {
-            InitializeComponent();
         }
     }
 }

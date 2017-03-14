@@ -7,20 +7,35 @@
         xmlns:local="clr-namespace:ZzaDesktop"
         Title="MainWindow" Height="300" Width="300">
     <Window.DataContext>
-        <local:MainWindow/>
+        <local:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate DataType="{x:Type cust:CustomerListViewModel}">
             <cust:CustomerListView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type order:OrderViewModel}">
-            <order:OrderView/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type prep:OrderPrepViewModel}">
             <prep:OrderPrepView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type order:OrderViewModel}">
+            <order:OrderView/>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid x:Name="NavBar">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Customers" Command="{Binding NavigationCommand}" CommandParameter="customers" Grid.Column="0"/>
+            <Button Content="OrderPrep" Command="{Binding NavigationCommand}" CommandParameter="orderPrep" Grid.Column="2"/>
+        </Grid>
+        <Grid x:Name="MainContent" Grid.Row="1">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
     </Grid>
 </Window>

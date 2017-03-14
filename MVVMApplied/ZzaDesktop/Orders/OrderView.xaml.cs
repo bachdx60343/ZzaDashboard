@@ -22,7 +22,7 @@ namespace ZzaDashboard.Orders
     {
         public OrderView()
         {
-            InitializeComponent();
+            
         }
     }
 }
