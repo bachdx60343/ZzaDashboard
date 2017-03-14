@@ -81,6 +81,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="MvvmBehaviours.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\CustomersRepository.cs" />
     <Compile Include="Services\ICustomersRepository.cs" />
@@ -90,6 +91,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ShowNotificationMessageBehaviour.cs" />
     <Compile Include="ValidatableBindableBase.cs" />
     <Compile Include="ViewModelLocator.cs" />
   </ItemGroup>
