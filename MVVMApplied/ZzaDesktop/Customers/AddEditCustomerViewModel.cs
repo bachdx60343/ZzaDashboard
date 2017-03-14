@@ -16,11 +16,31 @@ namespace ZzaDesktop.Customers
             set { SetProperty(ref _editMode, value); }
         }
 
-        private Customer _editingCustomer = null;
+        private SimpleEditableCustomer _customer = null;
+        public SimpleEditableCustomer Customer
+        {
+            get { return _customer; }
+            set { SetProperty(ref _customer, value); }
+        }
 
+        private Customer _editingCustomer = null;
         public void SetCustomer(Customer customer)
         {
             _editingCustomer = customer;
+            Customer = new SimpleEditableCustomer();
+            CopyCustomer(customer, Customer);
         }
-     }
+
+        private void CopyCustomer(Customer source, SimpleEditableCustomer target)
+        {
+            target.Id = source.Id;
+            if (EditMode)
+            {
+                target.FirstName = source.FirstName;
+                target.LastName = source.LastName;
+                target.Phone = source.Phone;
+                target.Email = source.Email;
+            }
+        }
+    }
 }

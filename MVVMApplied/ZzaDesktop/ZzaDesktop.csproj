@@ -92,6 +92,7 @@
       <DependentUpon>CustomerListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Customers\CustomerListViewModel.cs" />
+    <Compile Include="Customers\SimpleEditableCustomer.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
