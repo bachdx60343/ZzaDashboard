@@ -19,12 +19,11 @@ namespace ZzaDashboard.Customers
             OnChangeCustomerCommand = new RelayCommand(OnChangeCustomer);
         }
 
-        public void LoadCustomers()
+        public async void LoadCustomers()
         {
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
 
-            Task<List<Customer>> customersResult = _repo.GetCustomersAsync();
-            Customers = new ObservableCollection<Customer>(customersResult.Result);
+            Customers = new ObservableCollection<Customer>(await _repo.GetCustomersAsync());
         }
 
         public RelayCommand DeleteCommand { get; private set; }

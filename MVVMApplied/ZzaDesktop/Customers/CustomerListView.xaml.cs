@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ZzaDashboard.Customers
+namespace ZzaDesktop.Customers
 {
     /// <summary>
     /// Interaction logic for CustomerListView.xaml
@@ -22,6 +22,7 @@ namespace ZzaDashboard.Customers
     {
         public CustomerListView()
         {
+            InitializeComponent();
         }
     }
 }

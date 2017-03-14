@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ZzaDashboard.Orders
+namespace ZzaDesktop.Orders
 {
     /// <summary>
     /// Interaction logic for OrderView.xaml
@@ -22,7 +22,7 @@ namespace ZzaDashboard.Orders
     {
         public OrderView()
         {
-            
+            InitializeComponent();
         }
     }
 }

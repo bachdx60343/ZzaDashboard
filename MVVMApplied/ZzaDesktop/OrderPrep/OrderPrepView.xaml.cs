@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ZzaDashboard.OrderPrep
+namespace ZzaDesktop.OrderPrep
 {
     /// <summary>
     /// Interaction logic for OrderPrepView.xaml
@@ -22,6 +22,7 @@ namespace ZzaDashboard.OrderPrep
     {
         public OrderPrepView()
         {
+            InitializeComponent();
         }
     }
 }

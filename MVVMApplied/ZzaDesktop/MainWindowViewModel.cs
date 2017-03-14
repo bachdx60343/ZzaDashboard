@@ -27,7 +27,7 @@ namespace ZzaDesktop
             set { SetProperty(ref _currentViewModel, value); }
         }
 
-        public RelayCommand<string> NavigationCommand { get; set; }
+        public RelayCommand<string> NavigationCommand { get; private set; }
 
         private void OnNav(string destination)
         {
