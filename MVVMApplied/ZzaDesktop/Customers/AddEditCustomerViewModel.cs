@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,15 @@ namespace ZzaDesktop.Customers
 {
     class AddEditCustomerViewModel : BindableBase
     {
+        public AddEditCustomerViewModel()
+        {
+            SaveCommand = new RelayCommand(OnSave, CanSave);
+            CancelCommand = new RelayCommand(OnCancel);
+        }
+
+        public RelayCommand SaveCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
+
         private bool _editMode;
         public bool EditMode
         {
@@ -27,8 +37,16 @@ namespace ZzaDesktop.Customers
         public void SetCustomer(Customer customer)
         {
             _editingCustomer = customer;
+            if (Customer != null)
+                Customer.ErrorsChanged -= RaiseCanExecuteChanged;
             Customer = new SimpleEditableCustomer();
+            Customer.ErrorsChanged += RaiseCanExecuteChanged;
             CopyCustomer(customer, Customer);
+        }
+
+        private void RaiseCanExecuteChanged(object sender, DataErrorsChangedEventArgs e)
+        {
+            SaveCommand.RaiseCanExecuteChanged();
         }
 
         private void CopyCustomer(Customer source, SimpleEditableCustomer target)
@@ -41,6 +59,21 @@ namespace ZzaDesktop.Customers
                 target.Phone = source.Phone;
                 target.Email = source.Email;
             }
+        }
+
+        public event Action Done = delegate { };
+
+        private void OnSave()
+        {
+            Done();
+        }
+        private bool CanSave()
+        {
+            return !Customer.HasErrors;
+        }
+        private void OnCancel()
+        {
+            Done();
         }
     }
 }
