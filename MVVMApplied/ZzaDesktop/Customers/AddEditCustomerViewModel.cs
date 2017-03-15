@@ -5,13 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zza.Data;
+using ZzaDesktop.Services;
 
 namespace ZzaDesktop.Customers
 {
     class AddEditCustomerViewModel : BindableBase
     {
-        public AddEditCustomerViewModel()
+        private ICustomersRepository _repo;
+
+        public AddEditCustomerViewModel(ICustomersRepository repo)
         {
+            _repo = repo;
             SaveCommand = new RelayCommand(OnSave, CanSave);
             CancelCommand = new RelayCommand(OnCancel);
         }
@@ -34,6 +38,7 @@ namespace ZzaDesktop.Customers
         }
 
         private Customer _editingCustomer = null;
+
         public void SetCustomer(Customer customer)
         {
             _editingCustomer = customer;
@@ -63,13 +68,27 @@ namespace ZzaDesktop.Customers
 
         public event Action Done = delegate { };
 
-        private void OnSave()
+        private async void OnSave()
         {
+            UpdateCustomer(Customer, _editingCustomer);
+            if (EditMode)
+                await _repo.UpdateCustomerAsync(_editingCustomer);
+            else
+                await _repo.AddCustomerAsync(_editingCustomer);
             Done();
         }
+
+        private void UpdateCustomer(SimpleEditableCustomer source, Customer target)
+        {
+            target.FirstName = source.FirstName;
+            target.LastName = source.LastName;
+            target.Phone = source.Phone;
+            target.Email = source.Email;
+        }
+
         private bool CanSave()
         {
-            return !Customer.HasErrors;
+            return !Customer.HasErrors  ;
         }
         private void OnCancel()
         {
